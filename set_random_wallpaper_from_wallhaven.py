@@ -53,6 +53,7 @@ def set_wallpaper(image_path):
     Sets the image as wallpaper.
     """
     ctypes.windll.user32.SystemParametersInfoW(20, 0, str(image_path), 3)
+    print(f"Wallpaper downloaded and set: {image_path}")
 
 
 def rename_file(file_name, replacements):
@@ -74,7 +75,6 @@ def main():
     os.makedirs(wallpaper_folder, exist_ok=True)
 
     try:
-        # Get settings from the config
         categories = config.CATEGORIES
         sorting = config.SORTING
         q = config.Q
@@ -90,9 +90,8 @@ def main():
 
             if downloaded_image:
                 set_wallpaper(downloaded_image)
-                print(f"Wallpaper downloaded and set: {downloaded_image}")
     except Exception as err:
-        print(f"An error occurred: {err}")
+        print(f"Error in main function: {err}")
 
 
 if __name__ == "__main__":
